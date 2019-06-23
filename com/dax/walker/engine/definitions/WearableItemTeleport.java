@@ -12,7 +12,7 @@ import java.util.Arrays;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
-public class ItemTeleport {
+public class WearableItemTeleport {
 
     public static final Pattern RING_OF_WEALTH_MATCHER = Pattern.compile("(?i)ring of wealth.?\\(.+");
     public static final Pattern RING_OF_DUELING_MATCHER = Pattern.compile("(?i)ring of dueling.?\\(.+");
@@ -23,7 +23,8 @@ public class ItemTeleport {
 
 
     public static boolean has(Pattern itemMatcher) {
-        return Inventory.contains(item -> itemMatcher.matcher(item.getName()).matches() && !item.isNoted());
+        return Inventory.contains(item -> itemMatcher.matcher(item.getName()).matches() && !item.isNoted())
+                || Equipment.contains(item -> itemMatcher.matcher(item.getName()).matches());
     }
 
     public static boolean teleport(Pattern itemMatcher, Pattern option) {

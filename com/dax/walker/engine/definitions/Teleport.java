@@ -68,122 +68,122 @@ public enum Teleport {
 
     RING_OF_WEALTH_GRAND_EXCHANGE(
             35, new Position(3161, 3478, 0),
-            () -> ItemTeleport.has(ItemTeleport.RING_OF_WEALTH_MATCHER),
-            () -> ItemTeleport.teleport(ItemTeleport.RING_OF_WEALTH_MATCHER, Pattern.compile("(?i)Grand Exchange"))
+            () -> WearableItemTeleport.has(WearableItemTeleport.RING_OF_WEALTH_MATCHER),
+            () -> WearableItemTeleport.teleport(WearableItemTeleport.RING_OF_WEALTH_MATCHER, Pattern.compile("(?i)Grand Exchange"))
     ),
 
     RING_OF_WEALTH_FALADOR(
             35, new Position(2994, 3377, 0),
-            () -> ItemTeleport.has(ItemTeleport.RING_OF_WEALTH_MATCHER),
-            () -> ItemTeleport.teleport(ItemTeleport.RING_OF_WEALTH_MATCHER, Pattern.compile("(?i)falador.*"))
+            () -> WearableItemTeleport.has(WearableItemTeleport.RING_OF_WEALTH_MATCHER),
+            () -> WearableItemTeleport.teleport(WearableItemTeleport.RING_OF_WEALTH_MATCHER, Pattern.compile("(?i)falador.*"))
     ),
 
     RING_OF_DUELING_DUEL_ARENA (
             35, new Position(3313, 3233, 0),
-            () -> ItemTeleport.has(ItemTeleport.RING_OF_DUELING_MATCHER),
-            () -> ItemTeleport.teleport(ItemTeleport.RING_OF_DUELING_MATCHER, Pattern.compile("(?i).*duel arena.*"))
+            () -> WearableItemTeleport.has(WearableItemTeleport.RING_OF_DUELING_MATCHER),
+            () -> WearableItemTeleport.teleport(WearableItemTeleport.RING_OF_DUELING_MATCHER, Pattern.compile("(?i).*duel arena.*"))
     ),
 
     RING_OF_DUELING_CASTLE_WARS (
             35, new Position(2440, 3090, 0),
-            () -> ItemTeleport.has(ItemTeleport.RING_OF_DUELING_MATCHER),
-            () -> ItemTeleport.teleport(ItemTeleport.RING_OF_DUELING_MATCHER, Pattern.compile("(?i).*Castle Wars.*"))
+            () -> WearableItemTeleport.has(WearableItemTeleport.RING_OF_DUELING_MATCHER),
+            () -> WearableItemTeleport.teleport(WearableItemTeleport.RING_OF_DUELING_MATCHER, Pattern.compile("(?i).*Castle Wars.*"))
     ),
 
     RING_OF_DUELING_CLAN_WARS (
             35, new Position(3388, 3161, 0),
-            () -> ItemTeleport.has(ItemTeleport.RING_OF_DUELING_MATCHER),
-            () -> ItemTeleport.teleport(ItemTeleport.RING_OF_DUELING_MATCHER, Pattern.compile("(?i).*Clan Wars.*"))
+            () -> WearableItemTeleport.has(WearableItemTeleport.RING_OF_DUELING_MATCHER),
+            () -> WearableItemTeleport.teleport(WearableItemTeleport.RING_OF_DUELING_MATCHER, Pattern.compile("(?i).*Clan Wars.*"))
     ),
 
     NECKLACE_OF_PASSAGE_WIZARD_TOWER (
             35, new Position(3113, 3179, 0),
-            () -> ItemTeleport.has(ItemTeleport.NECKLACE_OF_PASSAGE_MATCHER),
-            () -> ItemTeleport.teleport(ItemTeleport.NECKLACE_OF_PASSAGE_MATCHER, Pattern.compile("(?i).*wizard.+tower.*"))
+            () -> WearableItemTeleport.has(WearableItemTeleport.NECKLACE_OF_PASSAGE_MATCHER),
+            () -> WearableItemTeleport.teleport(WearableItemTeleport.NECKLACE_OF_PASSAGE_MATCHER, Pattern.compile("(?i).*wizard.+tower.*"))
     ),
 
     NECKLACE_OF_PASSAGE_OUTPOST (
             35, new Position(2430, 3347, 0),
-            () -> ItemTeleport.has(ItemTeleport.NECKLACE_OF_PASSAGE_MATCHER),
-            () -> ItemTeleport.teleport(ItemTeleport.NECKLACE_OF_PASSAGE_MATCHER, Pattern.compile("(?i).*the.+outpost.*"))
+            () -> WearableItemTeleport.has(WearableItemTeleport.NECKLACE_OF_PASSAGE_MATCHER),
+            () -> WearableItemTeleport.teleport(WearableItemTeleport.NECKLACE_OF_PASSAGE_MATCHER, Pattern.compile("(?i).*the.+outpost.*"))
     ),
 
     NECKLACE_OF_PASSAGE_EYRIE (
             35, new Position(3406, 3156, 0),
-            () -> ItemTeleport.has(ItemTeleport.NECKLACE_OF_PASSAGE_MATCHER),
-            () -> ItemTeleport.teleport(ItemTeleport.NECKLACE_OF_PASSAGE_MATCHER, Pattern.compile("(?i).*eagl.+eyrie.*"))
+            () -> WearableItemTeleport.has(WearableItemTeleport.NECKLACE_OF_PASSAGE_MATCHER),
+            () -> WearableItemTeleport.teleport(WearableItemTeleport.NECKLACE_OF_PASSAGE_MATCHER, Pattern.compile("(?i).*eagl.+eyrie.*"))
     ),
 
     COMBAT_BRACE_WARRIORS_GUILD (
             35, new Position(2882, 3550, 0),
-            () -> ItemTeleport.has(ItemTeleport.COMBAT_BRACE_MATCHER),
-            () -> ItemTeleport.teleport(ItemTeleport.COMBAT_BRACE_MATCHER, Pattern.compile("(?i).*warrior.+guild.*"))
+            () -> WearableItemTeleport.has(WearableItemTeleport.COMBAT_BRACE_MATCHER),
+            () -> WearableItemTeleport.teleport(WearableItemTeleport.COMBAT_BRACE_MATCHER, Pattern.compile("(?i).*warrior.+guild.*"))
     ),
 
     COMBAT_BRACE_CHAMPIONS_GUILD (
             35, new Position(3190, 3366, 0),
-            () -> ItemTeleport.has(ItemTeleport.COMBAT_BRACE_MATCHER),
-            () -> ItemTeleport.teleport(ItemTeleport.COMBAT_BRACE_MATCHER, Pattern.compile("(?i).*champion.+guild.*"))
+            () -> WearableItemTeleport.has(WearableItemTeleport.COMBAT_BRACE_MATCHER),
+            () -> WearableItemTeleport.teleport(WearableItemTeleport.COMBAT_BRACE_MATCHER, Pattern.compile("(?i).*champion.+guild.*"))
     ),
 
     COMBAT_BRACE_MONASTRY (
             35, new Position(3053, 3486, 0),
-            () -> ItemTeleport.has(ItemTeleport.COMBAT_BRACE_MATCHER),
-            () -> ItemTeleport.teleport(ItemTeleport.COMBAT_BRACE_MATCHER, Pattern.compile("(?i).*monastery.*"))
+            () -> WearableItemTeleport.has(WearableItemTeleport.COMBAT_BRACE_MATCHER),
+            () -> WearableItemTeleport.teleport(WearableItemTeleport.COMBAT_BRACE_MATCHER, Pattern.compile("(?i).*monastery.*"))
     ),
 
     COMBAT_BRACE_RANGE_GUILD (
             35, new Position(2656, 3442, 0),
-            () -> ItemTeleport.has(ItemTeleport.COMBAT_BRACE_MATCHER),
-            () -> ItemTeleport.teleport(ItemTeleport.COMBAT_BRACE_MATCHER, Pattern.compile("(?i).*rang.+guild.*"))
+            () -> WearableItemTeleport.has(WearableItemTeleport.COMBAT_BRACE_MATCHER),
+            () -> WearableItemTeleport.teleport(WearableItemTeleport.COMBAT_BRACE_MATCHER, Pattern.compile("(?i).*rang.+guild.*"))
     ),
 
     GAMES_NECK_BURTHORPE (
             35, new Position(2897, 3551, 0),
-            () -> ItemTeleport.has(ItemTeleport.GAMES_NECKLACE_MATCHER),
-            () -> ItemTeleport.teleport(ItemTeleport.GAMES_NECKLACE_MATCHER, Pattern.compile("(?i).*burthorpe.*"))
+            () -> WearableItemTeleport.has(WearableItemTeleport.GAMES_NECKLACE_MATCHER),
+            () -> WearableItemTeleport.teleport(WearableItemTeleport.GAMES_NECKLACE_MATCHER, Pattern.compile("(?i).*burthorpe.*"))
     ),
 
     GAMES_NECK_BARBARIAN_OUTPOST (
             35, new Position(2520, 3570, 0),
-            () -> ItemTeleport.has(ItemTeleport.GAMES_NECKLACE_MATCHER),
-            () -> ItemTeleport.teleport(ItemTeleport.GAMES_NECKLACE_MATCHER, Pattern.compile("(?i).*barbarian.*"))
+            () -> WearableItemTeleport.has(WearableItemTeleport.GAMES_NECKLACE_MATCHER),
+            () -> WearableItemTeleport.teleport(WearableItemTeleport.GAMES_NECKLACE_MATCHER, Pattern.compile("(?i).*barbarian.*"))
     ),
 
     GAMES_NECK_CORPREAL (
             35, new Position(2965, 4832, 2),
-            () -> ItemTeleport.has(ItemTeleport.GAMES_NECKLACE_MATCHER),
-            () -> ItemTeleport.teleport(ItemTeleport.GAMES_NECKLACE_MATCHER, Pattern.compile("(?i).*corpreal.*"))
+            () -> WearableItemTeleport.has(WearableItemTeleport.GAMES_NECKLACE_MATCHER),
+            () -> WearableItemTeleport.teleport(WearableItemTeleport.GAMES_NECKLACE_MATCHER, Pattern.compile("(?i).*corpreal.*"))
     ),
 
     GAMES_NECK_WINTER (
             35, new Position(1623, 3937, 0),
-            () -> ItemTeleport.has(ItemTeleport.GAMES_NECKLACE_MATCHER),
-            () -> ItemTeleport.teleport(ItemTeleport.GAMES_NECKLACE_MATCHER, Pattern.compile("(?i).*wintertodt.*"))
+            () -> WearableItemTeleport.has(WearableItemTeleport.GAMES_NECKLACE_MATCHER),
+            () -> WearableItemTeleport.teleport(WearableItemTeleport.GAMES_NECKLACE_MATCHER, Pattern.compile("(?i).*wintertodt.*"))
     ),
 
     GLORY_EDGE (
             35, new Position(3087, 3496, 0),
-            () -> ItemTeleport.has(ItemTeleport.GLORY_MATCHER),
-            () -> ItemTeleport.teleport(ItemTeleport.GLORY_MATCHER, Pattern.compile("(?i).*edgeville.*"))
+            () -> WearableItemTeleport.has(WearableItemTeleport.GLORY_MATCHER),
+            () -> WearableItemTeleport.teleport(WearableItemTeleport.GLORY_MATCHER, Pattern.compile("(?i).*edgeville.*"))
     ),
 
     GLORY_KARAMJA (
             35, new Position(2918, 3176, 0),
-            () -> ItemTeleport.has(ItemTeleport.GLORY_MATCHER),
-            () -> ItemTeleport.teleport(ItemTeleport.GLORY_MATCHER, Pattern.compile("(?i).*karamja.*"))
+            () -> WearableItemTeleport.has(WearableItemTeleport.GLORY_MATCHER),
+            () -> WearableItemTeleport.teleport(WearableItemTeleport.GLORY_MATCHER, Pattern.compile("(?i).*karamja.*"))
     ),
 
     GLORY_DRAYNOR (
             35, new Position(3105, 3251, 0),
-            () -> ItemTeleport.has(ItemTeleport.GLORY_MATCHER),
-            () -> ItemTeleport.teleport(ItemTeleport.GLORY_MATCHER, Pattern.compile("(?i).*draynor.*"))
+            () -> WearableItemTeleport.has(WearableItemTeleport.GLORY_MATCHER),
+            () -> WearableItemTeleport.teleport(WearableItemTeleport.GLORY_MATCHER, Pattern.compile("(?i).*draynor.*"))
     ),
 
     GLORY_AL_KHARID (
             35, new Position(3293, 3163, 0),
-            () -> ItemTeleport.has(ItemTeleport.GLORY_MATCHER),
-            () -> ItemTeleport.teleport(ItemTeleport.GLORY_MATCHER, Pattern.compile("(?i).*al kharid.*"))
+            () -> WearableItemTeleport.has(WearableItemTeleport.GLORY_MATCHER),
+            () -> WearableItemTeleport.teleport(WearableItemTeleport.GLORY_MATCHER, Pattern.compile("(?i).*al kharid.*"))
     ),
 
     ;

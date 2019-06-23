@@ -50,13 +50,14 @@ public class WalkerEngine implements RenderListener {
     public boolean walk(List<PathResult> list) {
         Game.getEventDispatcher().register(this);
         try {
-            PathResult pathResult = getBestPath(validPaths(list));
+            List<PathResult> validPaths = validPaths(list);
+            PathResult pathResult = getBestPath(validPaths);
             if (pathResult == null) {
                 Log.log(Level.WARNING, "DaxWalker", "No valid path found");
                 return false;
             }
             lastPath = pathResult;
-            Log.log(Level.FINE, "DaxWalker", "Chose path of cost: " + pathResult.getCost());
+            Log.log(Level.FINE, "DaxWalker", String.format("Chose path of cost: %d out of %d options.", pathResult.getCost(), validPaths.size()));
             return PathHandler.walk(convert(pathResult.getPath()), walkCondition, 3);
         } finally {
             Game.getEventDispatcher().deregister(this);
@@ -94,12 +95,16 @@ public class WalkerEngine implements RenderListener {
     private int getPathMoveCost(PathResult pathResult) {
         Teleport teleport = map.get(pathResult.getPath().get(0).toPosition());
         if (teleport == null) return pathResult.getCost();
+        Log.fine(teleport + " is valid.");
         return teleport.getMoveCost() + pathResult.getCost();
     }
 
     @Override
     public void notify(RenderEvent renderEvent) {
         PathResult pathResult = lastPath;
+
+        if (pathResult == null) return;
+
         if (playerPosition == null || !playerPosition.equals(Players.getLocal().getPosition())) {
             playerPosition = Players.getLocal().getPosition();
             bfsMapCache = new BFSMapCache();
