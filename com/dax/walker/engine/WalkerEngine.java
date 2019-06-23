@@ -95,7 +95,6 @@ public class WalkerEngine implements RenderListener {
     private int getPathMoveCost(PathResult pathResult) {
         Teleport teleport = map.get(pathResult.getPath().get(0).toPosition());
         if (teleport == null) return pathResult.getCost();
-        Log.fine(teleport + " is valid.");
         return teleport.getMoveCost() + pathResult.getCost();
     }
 
