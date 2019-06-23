@@ -4,7 +4,6 @@ import com.dax.walker.models.Requirement;
 import org.rspeer.runetek.api.component.tab.Inventory;
 import org.rspeer.runetek.api.component.tab.Magic;
 import org.rspeer.runetek.api.component.tab.Spell;
-import org.rspeer.runetek.api.movement.pathfinding.executor.custom.TeleportExecutor;
 import org.rspeer.runetek.api.movement.position.Position;
 
 import java.util.ArrayList;
