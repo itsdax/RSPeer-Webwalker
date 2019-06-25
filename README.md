@@ -41,10 +41,10 @@ daxWalker.walkTo(new Position(3145, 9914, 0), () -> {
 daxWalker.setUseTeleports(false);
 ```
 
-## Contributing
+# Contributing
 The following links will direct you to where to look for contributing to the Walker.
 
-### - [Adding new Pop-Up interface](https://github.com/itsdax/RSPeer-Webwalker/blob/master/com/dax/walker/engine/definitions/RSPopUp.java)
+#### - [Adding new Pop-Up interface](https://github.com/itsdax/RSPeer-Webwalker/blob/master/com/dax/walker/engine/definitions/RSPopUp.java)
 ```java
 package com.dax.walker.engine.definitions
 ```
