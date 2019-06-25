@@ -1,11 +1,16 @@
 package com.dax.walker.models;
 
 
+import com.allatori.annotations.DoNotRename;
+
 import java.util.List;
 
 
+@DoNotRename
 public class BulkBankPathRequest {
+    @DoNotRename
     private PlayerDetails player;
+    @DoNotRename
     private List<BankPathRequestPair> requests;
 
     public BulkBankPathRequest(PlayerDetails player, List<BankPathRequestPair> requests) {

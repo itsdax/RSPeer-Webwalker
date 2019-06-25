@@ -1,7 +1,9 @@
 package com.dax.walker.models;
 
+import com.allatori.annotations.DoNotRename;
 import org.rspeer.runetek.api.movement.position.Position;
 
+@DoNotRename
 public enum RSBank {
     FALADOR_WEST(2946, 3368, 0),
     FALADOR_EAST(3013, 3355, 0),
