@@ -28,6 +28,7 @@ daxWalker.walkToBank(RSBank.VARROCK_EAST);
 ```
 
 #### Adding Custom Stopping Conditions/Passive Actions
+This condition will be checked in between walks and idle actions.
 ```java
 daxWalker.walkTo(new Position(3145, 9914, 0), () -> {
     if (Players.getLocal().getHealthPercent() < 20) {
@@ -44,7 +45,7 @@ daxWalker.setUseTeleports(false);
 ```
 
 # Contributing
-The following links will direct you to where to look for contributing to the Walker. Create a pull request and I'll look it over.
+The following links will direct you to where to look for contributing to the Walker. Create a pull request and I'll look it over. Thanks for contributing!
 
 ```java
 package com.dax.walker.engine.definitions;
