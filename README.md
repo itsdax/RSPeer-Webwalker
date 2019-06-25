@@ -51,7 +51,7 @@ The following links will direct you to where to look for contributing to the Wal
 package com.dax.walker.engine.definitions;
 ```
 
-- [Adding new Pop-Up interface](https://github.com/itsdax/RSPeer-Webwalker/blob/master/com/dax/walker/engine/definitions/RSPopUp.java)
+- [Adding new Pop-Up interface](https://github.com/itsdax/RSPeer-Webwalker/blob/master/com/dax/walker/engine/definitions/PopUpInterfaces.java)
 
 ![](https://i.imgur.com/ip19tvk.png)
 
