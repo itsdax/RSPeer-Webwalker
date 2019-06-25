@@ -42,34 +42,35 @@ daxWalker.setUseTeleports(false);
 ```
 
 ## Contributing
+The following links will direct you to where to look for contributing to the Walker.
 
-##### - Adding new Pop-Up interface
+##### - [Adding new Pop-Up interface](https://github.com/itsdax/RSPeer-Webwalker/blob/master/com/dax/walker/engine/definitions/RSPopUp.java)
 ```java
 package com.dax.walker.engine.definitions
 ```
 ![](https://i.imgur.com/ip19tvk.png)
 
 
-##### - Adding new Teleport Method
+##### - [Adding new Teleport Method](https://github.com/itsdax/RSPeer-Webwalker/blob/master/com/dax/walker/engine/definitions/Teleport.java)
 ```java
 package com.dax.walker.engine.definitions;
 ```
 ![](https://i.imgur.com/Jp0wewr.png)
 
-##### - Adding new Wearable Teleport Item
+##### - [Adding new Wearable Teleport Item](https://github.com/itsdax/RSPeer-Webwalker/blob/master/com/dax/walker/engine/definitions/WearableItemTeleport.java)
 ```java
 package com.dax.walker.engine.definitions;
 ```
 ![](https://i.imgur.com/nkqApnQ.png)
 
-##### - Updating Stronghold Answers
+##### - [Updating Stronghold Answers](https://github.com/itsdax/RSPeer-Webwalker/blob/master/com/dax/walker/engine/definitions/StrongHoldAnswers.java)
 ```java
 package com.dax.walker.engine.definitions;
 ```
 ![](https://i.imgur.com/XJfCXqI.png)
 
 
-##### - Adding Path Links
+##### - [Adding Path Links](https://github.com/itsdax/RSPeer-Webwalker/blob/master/com/dax/walker/engine/definitions/PathLink.java)
 ```java
 package com.dax.walker.engine.definitions;
 ```
