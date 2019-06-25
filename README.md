@@ -50,19 +50,19 @@ The following links will direct you to where to look for contributing to the Wal
 package com.dax.walker.engine.definitions;
 ```
 
-###### - [Adding new Pop-Up interface](https://github.com/itsdax/RSPeer-Webwalker/blob/master/com/dax/walker/engine/definitions/RSPopUp.java)
+- [Adding new Pop-Up interface](https://github.com/itsdax/RSPeer-Webwalker/blob/master/com/dax/walker/engine/definitions/RSPopUp.java)
 ![](https://i.imgur.com/ip19tvk.png)
 
 
-###### - [Adding new Teleport Method](https://github.com/itsdax/RSPeer-Webwalker/blob/master/com/dax/walker/engine/definitions/Teleport.java)
+- [Adding new Teleport Method](https://github.com/itsdax/RSPeer-Webwalker/blob/master/com/dax/walker/engine/definitions/Teleport.java)
 ![](https://i.imgur.com/Jp0wewr.png)
 
-###### - [Adding new Wearable Teleport Item](https://github.com/itsdax/RSPeer-Webwalker/blob/master/com/dax/walker/engine/definitions/WearableItemTeleport.java)
+- [Adding new Wearable Teleport Item](https://github.com/itsdax/RSPeer-Webwalker/blob/master/com/dax/walker/engine/definitions/WearableItemTeleport.java)
 ![](https://i.imgur.com/nkqApnQ.png)
 
-###### - [Updating Stronghold Answers](https://github.com/itsdax/RSPeer-Webwalker/blob/master/com/dax/walker/engine/definitions/StrongHoldAnswers.java)
+- [Updating Stronghold Answers](https://github.com/itsdax/RSPeer-Webwalker/blob/master/com/dax/walker/engine/definitions/StrongHoldAnswers.java)
 ![](https://i.imgur.com/XJfCXqI.png)
 
 
-###### - [Adding Path Links](https://github.com/itsdax/RSPeer-Webwalker/blob/master/com/dax/walker/engine/definitions/PathLink.java)
+- [Adding Path Links](https://github.com/itsdax/RSPeer-Webwalker/blob/master/com/dax/walker/engine/definitions/PathLink.java)
 ![](https://i.imgur.com/KvfHUsz.png)
