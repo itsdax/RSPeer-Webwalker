@@ -1,5 +1,7 @@
 # RSPeer-Webwalker
 
+Fast and customizable webwalker for RSPeer. Calculates a path to your destination and walks it. Accounts for path requirements, teleports, and shortcuts.
+
 #### Creating DaxWalker instance
 ```java
 DaxWalker daxWalker = new DaxWalker(new Server("sub_DPjXXzL5DeSiPf", "PUBLIC-KEY"));
