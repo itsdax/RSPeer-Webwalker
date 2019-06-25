@@ -39,6 +39,12 @@ public class PathHandler {
         int fail = 0;
         Position previous = null;
         while (!script.isStopping() && !isFinishedPathing(path.get(path.size() - 1))) {
+
+            if (script.isPaused()) {
+                Time.sleep(500);
+                continue;
+            }
+
             if (fail >= maxRetries) return false;
 
             Position next = furthestTileInPath(path, randomDestinationDistance());

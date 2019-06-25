@@ -36,18 +36,31 @@ public class WalkerEngine implements RenderListener {
     private Position playerPosition;
 
     public WalkerEngine() {
+        this(null);
+    }
+
+    public WalkerEngine(WalkCondition walkCondition) {
         map = new ConcurrentHashMap<>();
         for (Teleport teleport : Teleport.values()) {
             map.put(teleport.getLocation(), teleport);
         }
         runEnergyManager = new RunEnergyManager();
-        walkCondition = () -> {
+        this.walkCondition = () -> {
             runEnergyManager.trigger();
             return false;
         };
+        if (walkCondition != null) {
+            this.walkCondition = this.walkCondition.and(walkCondition);
+        }
     }
 
     public boolean walk(List<PathResult> list) {
+        return this.walk(list, null);
+    }
+
+    public boolean walk(List<PathResult> list, WalkCondition walkCondition) {
+        walkCondition = walkCondition != null ? this.walkCondition.and(walkCondition) : this.walkCondition;
+
         Game.getEventDispatcher().register(this);
         try {
             List<PathResult> validPaths = validPaths(list);
@@ -93,6 +106,7 @@ public class WalkerEngine implements RenderListener {
     }
 
     private int getPathMoveCost(PathResult pathResult) {
+        if (Players.getLocal().getPosition().equals(pathResult.getPath().get(0).toPosition())) return pathResult.getCost();
         Teleport teleport = map.get(pathResult.getPath().get(0).toPosition());
         if (teleport == null) return pathResult.getCost();
         return teleport.getMoveCost() + pathResult.getCost();
@@ -113,7 +127,7 @@ public class WalkerEngine implements RenderListener {
         for (int i = 0; i < path.size() - 1; i++) {
             if (path.get(i).getZ() != playerPosition.getFloorLevel()) continue;
             if (!bfsMapCache.canReach(path.get(i).toPosition())) continue;
-            PositionalDebug.drawArrow(renderEvent.getSource(), path.get(i).toPosition(), path.get(i + 1).toPosition(), new Color(0, 255, 20, 100));
+            PositionalDebug.drawArrow(renderEvent.getSource(), path.get(i).toPosition(), path.get(i + 1).toPosition(), new Color(0, 203, 18, 76));
         }
 
         PositionalDebug.outline(renderEvent.getSource(), PathHandler.furthestTileInPath(pathResult.getPath().stream().map(Point3D::toPosition).collect(Collectors.toList()), 20), new Color(255, 67,0, 140));

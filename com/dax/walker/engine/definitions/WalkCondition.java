@@ -4,7 +4,8 @@ import java.util.function.BooleanSupplier;
 
 /**
  * At any time this method returns true, Walker will exit out
- * and return false as it has not completely traversed the path.
+ * and return false since it has not successfully traversed
+ * the path.
  */
 public interface WalkCondition extends BooleanSupplier {
 

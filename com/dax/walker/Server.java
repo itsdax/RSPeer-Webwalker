@@ -7,6 +7,8 @@ import com.dax.walker.models.exceptions.UnknownException;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import okhttp3.*;
+import org.rspeer.RSPeer;
+import org.rspeer.script.Script;
 import org.rspeer.ui.Log;
 
 import java.io.IOException;
@@ -75,7 +77,7 @@ public class Server {
                 .addHeader("key", key)
                 .addHeader("secret", secret)
                 .addHeader("Content-Type", "application/json")
-                .addHeader("User-Agent", "RSPeer")
+                .addHeader("User-Agent", "RSPeer: " + ((Script)Thread.currentThread()).getMeta().name())
                 .build();
     }
 
