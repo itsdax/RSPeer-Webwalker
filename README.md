@@ -27,8 +27,17 @@ daxWalker.walkToBank(RSBank.VARROCK_EAST);
 ```
 
 ### Adding Custom Stopping Conditions/Passive Actions
-Soon...
+```
+daxWalker.walkTo(new Position(3145, 9914, 0), () -> {
+    if (Players.getLocal().getHealthPercent() < 20) {
+        Food.eat();
+    }
+    return false; // false to continue walking after check. true to exit out of walker.
+});
+```
 
 
-### Customizing Teleport Logic
-Soon...
+### Disabling Teleports
+```
+daxWalker.setUseTeleports(false);
+```
