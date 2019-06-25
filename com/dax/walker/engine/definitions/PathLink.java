@@ -110,8 +110,6 @@ public enum PathLink {
             (start, end, walkCondition) -> EntityHandler.handleWithAction(Pattern.compile("(?i)port sarim"), start, end, walkCondition)
     ),
 
-
-
     ;
 
     private Position start;

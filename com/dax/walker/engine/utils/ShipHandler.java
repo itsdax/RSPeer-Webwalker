@@ -9,6 +9,9 @@ import java.util.Arrays;
 
 public class ShipHandler {
 
+    private ShipHandler() {
+    }
+
     public static boolean isOnShip() {
         return hasShipObjects() && getGangPlank() != null && new BFSMapCache().getAccessibleArea() < 100;
     }

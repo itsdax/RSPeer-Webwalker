@@ -4,7 +4,7 @@ import com.dax.walker.engine.definitions.PathHandleState;
 import com.dax.walker.engine.definitions.StrongHoldAnswers;
 import com.dax.walker.engine.definitions.WalkCondition;
 import com.dax.walker.engine.pathfinding.BFSMapCache;
-import com.dax.walker.engine.utils.MovementManager;
+import com.dax.walker.engine.utils.RunManager;
 import org.rspeer.runetek.adapter.Positionable;
 import org.rspeer.runetek.adapter.component.InterfaceComponent;
 import org.rspeer.runetek.adapter.scene.Npc;
@@ -94,9 +94,9 @@ public class EntityHandler {
     }
 
     private static boolean waitFor(Position end, AtomicBoolean exitCondition, WalkCondition walkCondition) {
-        MovementManager movementManager = new MovementManager();
+        RunManager runManager = new RunManager();
         return Time.sleepUntil(() -> {
-            if (!movementManager.isWalking()) {
+            if (!runManager.isWalking()) {
                 return true;
             }
             if (walkCondition.getAsBoolean()) {

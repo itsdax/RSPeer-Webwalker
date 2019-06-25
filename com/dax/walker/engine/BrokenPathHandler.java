@@ -5,7 +5,7 @@ import com.dax.walker.engine.definitions.PathLink;
 import com.dax.walker.engine.definitions.PopUpInterfaces;
 import com.dax.walker.engine.definitions.WalkCondition;
 import com.dax.walker.engine.pathfinding.BFSMapCache;
-import com.dax.walker.engine.utils.MovementManager;
+import com.dax.walker.engine.utils.RunManager;
 import org.rspeer.runetek.adapter.Interactable;
 import org.rspeer.runetek.adapter.scene.SceneObject;
 import org.rspeer.runetek.api.commons.Time;
@@ -109,10 +109,10 @@ class BrokenPathHandler {
         Log.log(Level.FINE, "DaxWalker", "Handling " + sceneObject.getName() + "->" + Arrays.asList(sceneObject.getActions()));
         if (!determine(start, end).handle(sceneObject)) return PathHandleState.FAILED;
 
-        MovementManager movementManager = new MovementManager();
+        RunManager runManager = new RunManager();
         AtomicBoolean exitCondition = new AtomicBoolean(false);
         if (!Time.sleepUntil(() -> {
-            if (!movementManager.isWalking()) {
+            if (!runManager.isWalking()) {
                 Time.sleepUntil(() -> PopUpInterfaces.resolve() || end.distance(Players.getLocal()) <= 2 || new BFSMapCache().canReach(end), Players.getLocal().isAnimating() ? Random.mid(1200, 2000) : Random.mid(3500, 4500));
                 return true;
             }
@@ -135,10 +135,10 @@ class BrokenPathHandler {
     private static PathHandleState handleStrongHoldDoor(Position start, Position end, SceneObject sceneObject, WalkCondition walkCondition) {
         if (!determine(start, end).handle(sceneObject)) return PathHandleState.FAILED;
 
-        MovementManager movementManager = new MovementManager();
+        RunManager runManager = new RunManager();
         AtomicBoolean exitCondition = new AtomicBoolean(false);
         if (!Time.sleepUntil(() -> {
-            if (!movementManager.isWalking()) {
+            if (!runManager.isWalking()) {
                 return true;
             }
             if (walkCondition.getAsBoolean()) {

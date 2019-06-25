@@ -5,7 +5,7 @@ import com.dax.walker.engine.definitions.Teleport;
 import com.dax.walker.engine.definitions.WalkCondition;
 import com.dax.walker.engine.pathfinding.BFSMapCache;
 import com.dax.walker.engine.pathfinding.Region;
-import com.dax.walker.engine.utils.MovementManager;
+import com.dax.walker.engine.utils.RunManager;
 import com.dax.walker.engine.utils.ShipHandler;
 import org.rspeer.runetek.api.commons.Time;
 import org.rspeer.runetek.api.commons.math.Random;
@@ -90,14 +90,14 @@ public class PathHandler {
         if (!Movement.setWalkFlagWithConfirm(now)) return PathHandleState.FAILED;
 
         AtomicBoolean exitCondition = new AtomicBoolean(false);
-        MovementManager movementManager = new MovementManager();
+        RunManager runManager = new RunManager();
         int distance = randomWaitDistance();
         Time.sleepUntil(() -> {
             if (walkCondition.getAsBoolean()) {
                 exitCondition.set(true);
                 return true;
             }
-            return !movementManager.isWalking() || Players.getLocal().getPosition().distance(now) <= distance;
+            return !runManager.isWalking() || Players.getLocal().getPosition().distance(now) <= distance;
         }, 15000);
         return exitCondition.get() ? PathHandleState.EXIT : PathHandleState.SUCCESS;
     }
