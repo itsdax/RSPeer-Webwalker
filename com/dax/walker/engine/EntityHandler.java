@@ -23,7 +23,7 @@ import java.util.regex.Pattern;
 @DoNotRename
 public class EntityHandler {
 
-    private static final Pattern LIKELY = Pattern.compile("(?i)(yes|ok(ay)?|sure|alright|fine|(.*search away.*)|(.*can i.*?))*+");
+    private static final Pattern LIKELY = Pattern.compile("(?i)(yes|ok(ay)?|sure|alright|fine|(.*search away.*)|(.*can i.*?)).*");
     private static final Pattern UNLIKELY = Pattern.compile("(?i)no(.|.thank.*|.sorry*+)?");
 
     public static PathHandleState handleWithAction(Pattern action, Position start, Position end, WalkCondition walkCondition) {
