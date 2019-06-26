@@ -1,5 +1,6 @@
 package com.dax.walker.engine;
 
+import com.allatori.annotations.DoNotRename;
 import com.dax.walker.engine.definitions.PathHandleState;
 import com.dax.walker.engine.definitions.StrongHoldAnswers;
 import com.dax.walker.engine.definitions.WalkCondition;
@@ -19,6 +20,7 @@ import java.util.Comparator;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.regex.Pattern;
 
+@DoNotRename
 public class EntityHandler {
 
     private static final Pattern LIKELY = Pattern.compile("(?i)(yes|ok(ay)?|sure|alright|fine|(.*search away.*)|(.*can i.*?))*+");

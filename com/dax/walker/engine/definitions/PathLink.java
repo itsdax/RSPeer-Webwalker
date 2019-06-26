@@ -1,6 +1,7 @@
 package com.dax.walker.engine.definitions;
 
 import com.dax.walker.engine.EntityHandler;
+import com.dax.walker.engine.utils.LockPickHandler;
 import org.rspeer.runetek.api.movement.position.Position;
 import org.rspeer.runetek.api.movement.transportation.CharterShip;
 import org.rspeer.ui.Log;
@@ -110,29 +111,37 @@ public enum PathLink {
             (start, end, walkCondition) -> EntityHandler.handleWithAction(Pattern.compile("(?i)port sarim"), start, end, walkCondition)
     ),
 
-    ;
+    LUMBRIDGE_HAM_HIDEOUT(
+            new Position(3166, 3251, 0), new Position(3149, 9652, 0),
+            LockPickHandler::handle
+    ),
 
-    private Position start;
-    private Position end;
+    HAM_JAIL(
+            new Position(3183, 9611, 0), new Position(3182, 9611, 0),
+            LockPickHandler::handle
+    );
+
+    private Position a;
+    private Position b;
     private PathLinkHandler pathLinkHandler;
 
     PathLink(Position start, Position end, PathLinkHandler pathLinkHandler) {
-        this.start = start;
-        this.end = end;
+        this.a = start;
+        this.b = end;
         this.pathLinkHandler = pathLinkHandler;
     }
 
     public Position getStart() {
-        return start;
+        return a;
     }
 
     public Position getEnd() {
-        return end;
+        return b;
     }
 
     public PathHandleState handle(WalkCondition walkCondition) {
         Log.log(Level.FINE, "DaxWalker", "Triggering " + this);
-        return this.pathLinkHandler.handle(start, end, walkCondition);
+        return this.pathLinkHandler.handle(a, b, walkCondition);
     }
 
 }

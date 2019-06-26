@@ -1,5 +1,6 @@
 package com.dax.walker.engine;
 
+import com.allatori.annotations.DoNotRename;
 import com.dax.api.paint.debug.PositionalDebug;
 import com.dax.walker.engine.definitions.Teleport;
 import com.dax.walker.engine.definitions.WalkCondition;
@@ -24,6 +25,7 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.logging.Level;
 import java.util.stream.Collectors;
 
+@DoNotRename
 public class WalkerEngine implements RenderListener {
 
     private Map<Position, Teleport> map;

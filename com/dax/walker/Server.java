@@ -1,5 +1,6 @@
 package com.dax.walker;
 
+import com.allatori.annotations.DoNotRename;
 import com.dax.walker.models.*;
 import com.dax.walker.models.exceptions.AuthorizationException;
 import com.dax.walker.models.exceptions.RateLimitException;
@@ -16,6 +17,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.logging.Level;
 
+@DoNotRename
 public class Server {
 
     private static final String BASE_URL = "https://api.dax.cloud/walker";
@@ -43,7 +45,7 @@ public class Server {
     }
 
     private List<PathResult> makePathRequest(String url, String jsonPayload) {
-        if (System.currentTimeMillis() - rateLimit < 5000L) return Collections.emptyList();
+        if (System.currentTimeMillis() - rateLimit < 5000L) throw new RateLimitException("Throttling requests because key rate limit.");
 
         Request request = generateRequest(url, RequestBody.create(MediaType.parse("application/json"), jsonPayload));
         try {

@@ -1,5 +1,6 @@
 package com.dax.walker;
 
+import com.allatori.annotations.DoNotRename;
 import com.dax.walker.engine.WalkerEngine;
 import com.dax.walker.engine.definitions.Teleport;
 import com.dax.walker.engine.definitions.WalkCondition;
@@ -15,6 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+@DoNotRename
 public class DaxWalker {
 
     private Server server;

@@ -1,5 +1,6 @@
 package com.dax.walker.engine;
 
+import com.allatori.annotations.DoNotRename;
 import com.dax.walker.engine.definitions.PathHandleState;
 import com.dax.walker.engine.definitions.PathLink;
 import com.dax.walker.engine.definitions.PopUpInterfaces;
@@ -23,7 +24,8 @@ import java.util.function.Predicate;
 import java.util.logging.Level;
 import java.util.regex.Pattern;
 
-class BrokenPathHandler {
+@DoNotRename
+public class BrokenPathHandler {
 
     private enum NextMove {
         UNDERGROUND(Pattern.compile("(?i)(climb|jump|walk).down"),
@@ -82,13 +84,7 @@ class BrokenPathHandler {
         }
     }
 
-    static PathHandleState handle(Position start, Position end, WalkCondition walkCondition) {
-        PathLink pathLink = Arrays.stream(PathLink.values())
-                .filter(link -> link.getStart().equals(start) && link.getEnd().equals(end))
-                .findAny()
-                .orElse(null);
-        if (pathLink != null) return pathLink.handle(walkCondition);
-
+    public static PathHandleState handle(Position start, Position end, WalkCondition walkCondition) {
         SceneObject sceneObject = getBlockingObject(start, end);
         if (sceneObject != null) {
             return handleObject(start, end, sceneObject, walkCondition);
@@ -100,6 +96,15 @@ class BrokenPathHandler {
                 end.getX(), end.getY(), end.getFloorLevel()
         ));
         return PathHandleState.FAILED;
+    }
+
+    public static PathHandleState handlePathLink(Position start, Position end, WalkCondition walkCondition) {
+        PathLink pathLink = Arrays.stream(PathLink.values())
+                .filter(link -> link.getStart().equals(start) && link.getEnd().equals(end))
+                .findAny()
+                .orElse(null);
+        if (pathLink != null) return pathLink.handle(walkCondition);
+        return null;
     }
 
     private static PathHandleState handleObject(Position start, Position end, SceneObject sceneObject, WalkCondition walkCondition) {

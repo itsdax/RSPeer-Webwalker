@@ -1,5 +1,6 @@
 package com.dax.walker.engine;
 
+import com.allatori.annotations.DoNotRename;
 import com.dax.walker.engine.definitions.PathHandleState;
 import com.dax.walker.engine.definitions.Teleport;
 import com.dax.walker.engine.definitions.WalkCondition;
@@ -19,6 +20,7 @@ import java.util.List;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.logging.Level;
 
+@DoNotRename
 public class PathHandler {
 
     /**
@@ -45,10 +47,9 @@ public class PathHandler {
                 continue;
             }
 
+            Time.sleep(50);
             if (fail >= maxRetries) return false;
-
             Position next = furthestTileInPath(path, randomDestinationDistance());
-            Log.log(Level.INFO, "DaxWalker", "Handling " + next);
             PathHandleState state = handleNextAction(previous, next, path, walkCondition);
 
 
@@ -83,7 +84,11 @@ public class PathHandler {
         if (previous != null && previous.equals(now)) {
             Log.log(Level.FINE, "DaxWalker", "Handling disconnected path...");
             Position next = getNextTileInPath(now, path);
-            if (next != null) return BrokenPathHandler.handle(now, next, walkCondition);
+            if (next != null) {
+                PathHandleState pathHandleState = BrokenPathHandler.handlePathLink(now, next, walkCondition);
+                if (pathHandleState != null) return pathHandleState;
+                return BrokenPathHandler.handle(now, next, walkCondition);
+            }
         }
 
         // Normal Walking
@@ -108,9 +113,9 @@ public class PathHandler {
     }
 
     private static Position getNextTileInPath(Position current, List<Position> path) {
-        for (int i = 0; i < path.size(); i++) {
+        for (int i = 0; i < path.size() - 1; i++) {
             if (path.get(i).equals(current)) {
-                return i + 1 == path.size() ? path.get(i) : path.get(i + 1);
+                return path.get(i + 1);
             }
         }
         return null;
