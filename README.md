@@ -1,6 +1,6 @@
 # RSPeer-Webwalker
 
-Fast and customizable webwalker for RSPeer. Calculates a path to your destination and walks it. Accounts for path requirements, teleports, and shortcuts.
+Fast and customizable webwalker for RSPeer. Instantly calculates a path to your destination and walks it. Accounts for path requirements (quests, items, level), teleports, and shortcuts. Handles script pauses and stops. Dynamic walking conditions and exit conditions.
 
 #### Creating DaxWalker instance
 ```java
@@ -28,6 +28,7 @@ daxWalker.walkToBank(RSBank.VARROCK_EAST);
 ```
 
 #### Adding Custom Stopping Conditions/Passive Actions
+This condition will be checked in between walks and idle actions.
 ```java
 daxWalker.walkTo(new Position(3145, 9914, 0), () -> {
     if (Players.getLocal().getHealthPercent() < 20) {
@@ -44,36 +45,30 @@ daxWalker.setUseTeleports(false);
 ```
 
 # Contributing
-The following links will direct you to where to look for contributing to the Walker.
+The following links will direct you to where to look for contributing to the Walker. Create a pull request and I'll look it over. Thanks for contributing!
 
-#### - [Adding new Pop-Up interface](https://github.com/itsdax/RSPeer-Webwalker/blob/master/com/dax/walker/engine/definitions/RSPopUp.java)
 ```java
-package com.dax.walker.engine.definitions
+package com.dax.walker.engine.definitions;
 ```
+
+- [Adding new Pop-Up interface](https://github.com/itsdax/RSPeer-Webwalker/blob/master/com/dax/walker/engine/definitions/PopUpInterfaces.java)
+
 ![](https://i.imgur.com/ip19tvk.png)
 
 
-#### - [Adding new Teleport Method](https://github.com/itsdax/RSPeer-Webwalker/blob/master/com/dax/walker/engine/definitions/Teleport.java)
-```java
-package com.dax.walker.engine.definitions;
-```
+- [Adding new Teleport Method](https://github.com/itsdax/RSPeer-Webwalker/blob/master/com/dax/walker/engine/definitions/Teleport.java)
+
 ![](https://i.imgur.com/Jp0wewr.png)
 
-#### - [Adding new Wearable Teleport Item](https://github.com/itsdax/RSPeer-Webwalker/blob/master/com/dax/walker/engine/definitions/WearableItemTeleport.java)
-```java
-package com.dax.walker.engine.definitions;
-```
+- [Adding new Wearable Teleport Item](https://github.com/itsdax/RSPeer-Webwalker/blob/master/com/dax/walker/engine/definitions/WearableItemTeleport.java)
+
 ![](https://i.imgur.com/nkqApnQ.png)
 
-#### - [Updating Stronghold Answers](https://github.com/itsdax/RSPeer-Webwalker/blob/master/com/dax/walker/engine/definitions/StrongHoldAnswers.java)
-```java
-package com.dax.walker.engine.definitions;
-```
+- [Updating Stronghold Answers](https://github.com/itsdax/RSPeer-Webwalker/blob/master/com/dax/walker/engine/definitions/StrongHoldAnswers.java)
+
 ![](https://i.imgur.com/XJfCXqI.png)
 
 
-#### - [Adding Path Links](https://github.com/itsdax/RSPeer-Webwalker/blob/master/com/dax/walker/engine/definitions/PathLink.java)
-```java
-package com.dax.walker.engine.definitions;
-```
+- [Adding Path Links](https://github.com/itsdax/RSPeer-Webwalker/blob/master/com/dax/walker/engine/definitions/PathLink.java)
+
 ![](https://i.imgur.com/KvfHUsz.png)
