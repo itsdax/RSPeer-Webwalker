@@ -82,9 +82,9 @@ public class PathHandler {
 
         // Broken Path
         if (previous != null && previous.equals(now)) {
-            Log.log(Level.FINE, "DaxWalker", "Handling disconnected path...");
             Position next = getNextTileInPath(now, path);
             if (next != null) {
+                Log.log(Level.FINE, "DaxWalker", String.format("Handling disconnected path... %s -> %s", now, next));
                 PathHandleState pathHandleState = BrokenPathHandler.handlePathLink(now, next, walkCondition);
                 if (pathHandleState != null) return pathHandleState;
                 return BrokenPathHandler.handle(now, next, walkCondition);

@@ -46,6 +46,11 @@ public enum PathLink {
             (start, end, walkCondition) -> EntityHandler.handleCharter(CharterShip.Destination.MUSA_POINT, walkCondition)
     ),
 
+    CATHERBY_PORT_KHAZARD(
+            new Position(2796, 3414, 0), new Position(2673, 3148, 0),
+            (start, end, walkCondition) -> EntityHandler.handleCharter(CharterShip.Destination.PORT_KHAZARD, walkCondition)
+    ),
+
     BRIMHAVEN_ARDOUGHNE(
             new Position(2772, 3225, 0), new Position(2681, 3275, 0),
             (start, end, walkCondition) -> EntityHandler.handleWithAction(Pattern.compile("(?i)pay.fare"), start, end, walkCondition)
