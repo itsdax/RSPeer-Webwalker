@@ -8,6 +8,7 @@ import com.dax.walker.engine.definitions.WalkCondition;
 import com.dax.walker.engine.pathfinding.BFSMapCache;
 import com.dax.walker.engine.utils.RunManager;
 import org.rspeer.runetek.adapter.Interactable;
+import org.rspeer.runetek.adapter.Positionable;
 import org.rspeer.runetek.adapter.scene.SceneObject;
 import org.rspeer.runetek.api.commons.Time;
 import org.rspeer.runetek.api.commons.math.Random;
@@ -23,17 +24,19 @@ import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.function.Predicate;
 import java.util.logging.Level;
 import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 
 @DoNotRename
 public class BrokenPathHandler {
 
-    private enum NextMove {
+    public enum NextMove {
         UNDERGROUND(Pattern.compile("(?i)(climb|jump|walk).down"),
                 generateCase(sceneObject -> sceneObject.getName().matches("(?i)(trap.?door|manhole)"), Pattern.compile("(?i)Open|(Climb.down)"))
         ),
         FLOOR_UNDER(Pattern.compile("(?i)(climb|jump|walk).down"),
-                generateCase(sceneObject -> sceneObject.getName().matches("(?i)(trap.?door|manhole)"), Pattern.compile("(?i)Open|(Climb.down)"))),
-        FLOOR_ABOVE(Pattern.compile("(?i)(climb|walk).up")),
+                generateCase(sceneObject -> sceneObject.getName().matches("(?i)(trap.?door|manhole)"), Pattern.compile("(?i)Open|(Climb.down)"))
+        ),
+        FLOOR_ABOVE(Pattern.compile("(?i)(climb|jump|walk).up")),
         SAME_FLOOR(Pattern.compile("(Use(?i-m)|(walk|jump|climb).(across|over|under)|(open|push|enter)|(.+.through)|cross|board)"));
 
         private Pattern pattern;
@@ -48,6 +51,7 @@ public class BrokenPathHandler {
             for (DestinationStateSpecialCase specialCase : specialCases) {
                 if (specialCase.satisfies(sceneObject)) return true;
             }
+            if (sceneObject.getName().matches("chest.*")) return false;
             return containsAction(sceneObject, pattern);
         }
 
@@ -56,6 +60,13 @@ public class BrokenPathHandler {
                 if (specialCase.satisfies(sceneObject)) return specialCase.handle(sceneObject);
             }
             return sceneObject.interact(s -> pattern.matcher(s).matches());
+        }
+
+        public boolean handle() {
+            SceneObject sceneObject = Arrays.stream(SceneObjects.getLoaded(this::objectSatisfies))
+                    .min(Comparator.comparingDouble(Positionable::distance))
+                    .orElse(null);
+            return sceneObject != null && handle(sceneObject);
         }
 
     }
@@ -170,7 +181,7 @@ public class BrokenPathHandler {
     private static boolean containsAction(Interactable interactable, Pattern regex) {
         String[] actions = interactable.getActions();
         if (actions == null) return false;
-        return Arrays.stream(actions).anyMatch(s -> regex.matcher(s).matches());
+        return interactable.containsAction(s -> regex.matcher(s).matches());
     }
 
     private static NextMove determine(Position start, Position end) {

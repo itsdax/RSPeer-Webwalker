@@ -1,5 +1,6 @@
 package com.dax.walker.engine.definitions;
 
+import com.dax.walker.engine.BrokenPathHandler;
 import com.dax.walker.engine.EntityHandler;
 import com.dax.walker.engine.utils.LockPickHandler;
 import org.rspeer.runetek.api.movement.position.Position;
@@ -59,6 +60,11 @@ public enum PathLink {
     ARDOUGHNE_BRIMHAVEN(
             new Position(2681, 3275, 0), new Position(2772, 3225, 0),
             (start, end, walkCondition) -> EntityHandler.handleWithAction(Pattern.compile("(?i)pay.fare"), start, end, walkCondition)
+    ),
+
+    BRIMHAVEN_PORT_SARIM (
+            new Position(2760, 3237, 0), new Position(2953, 3146, 0),
+            (start, end, walkCondition) -> EntityHandler.handleCharter(CharterShip.Destination.PORT_SARIM, walkCondition)
     ),
 
     KHAZARD_CATHERBY(
@@ -124,7 +130,17 @@ public enum PathLink {
     HAM_JAIL(
             new Position(3183, 9611, 0), new Position(3182, 9611, 0),
             LockPickHandler::handle
-    );
+    ),
+
+    BURTHORP_DOWNSTAIRS (
+            new Position(2899, 3565, 0), new Position(2205, 4934, 1),
+            (start, end, walkCondition) -> BrokenPathHandler.NextMove.FLOOR_UNDER.handle() ? PathHandleState.SUCCESS : PathHandleState.FAILED
+    ),
+
+    BURTHORP_UPSTAIRS (
+            new Position(2205, 4934, 1), new Position(2899, 3565, 0),
+            (start, end, walkCondition) -> BrokenPathHandler.NextMove.FLOOR_ABOVE.handle() ? PathHandleState.SUCCESS : PathHandleState.FAILED
+            );
 
     private Position a;
     private Position b;
