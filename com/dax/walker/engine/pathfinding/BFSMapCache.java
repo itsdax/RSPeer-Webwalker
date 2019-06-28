@@ -1,5 +1,6 @@
 package com.dax.walker.engine.pathfinding;
 
+import org.rspeer.runetek.api.commons.math.Random;
 import org.rspeer.runetek.api.movement.position.Position;
 import org.rspeer.runetek.api.scene.Players;
 
@@ -54,6 +55,23 @@ public class BFSMapCache extends BFS {
         if (position.equals(Players.getLocal().getPosition())) return 0;
         Tile tile = getTile(position);
         return tile != null ? getCost(tile) : Integer.MAX_VALUE;
+    }
+
+    /**
+     *
+     * Collision aware random selector
+     *
+     * @param maxDistance
+     * @return
+     */
+    public Position getRandom(int maxDistance) {
+        // TODO: write an actual method for this...
+        for (int i = 0; i < 50000; i++) {
+            int x = Random.nextInt(0, 103);
+            int y = Random.nextInt(0, 103);
+            if (costMap[x][y] < maxDistance) return new Position(getRegion().getBase().getX() + x, getRegion().getBase().getY() + y);
+        }
+        return null;
     }
 
     private int getCost(Tile tile) {

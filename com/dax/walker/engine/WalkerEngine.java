@@ -12,11 +12,13 @@ import com.dax.walker.models.Point3D;
 import org.rspeer.runetek.api.Game;
 import org.rspeer.runetek.api.movement.position.Position;
 import org.rspeer.runetek.api.scene.Players;
+import org.rspeer.runetek.api.scene.Projection;
 import org.rspeer.runetek.event.listeners.RenderListener;
 import org.rspeer.runetek.event.types.RenderEvent;
 import org.rspeer.ui.Log;
 
 import java.awt.Color;
+import java.awt.Point;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
@@ -128,8 +130,21 @@ public class WalkerEngine implements RenderListener {
         List<Point3D> path = pathResult.getPath();
         for (int i = 0; i < path.size() - 1; i++) {
             if (path.get(i).getZ() != playerPosition.getFloorLevel()) continue;
+            if (path.get(i).toPosition().distance() > 30) continue;
             if (!bfsMapCache.canReach(path.get(i).toPosition())) continue;
             PositionalDebug.drawArrow(renderEvent.getSource(), path.get(i).toPosition(), path.get(i + 1).toPosition(), new Color(0, 203, 18, 76));
+        }
+
+        renderEvent.getSource().setColor(Color.GREEN);
+        for (int i = 0; i < path.size() - 1; i++) {
+            if (path.get(i).getZ() != playerPosition.getFloorLevel()) continue;
+            if (path.get(i).toPosition().distance() > 30) continue;
+            if (!bfsMapCache.canReach(path.get(i).toPosition())) continue;
+            Point a = Projection.toMinimap(path.get(i).toPosition());
+            if (a == null) continue;
+            Point b = Projection.toMinimap(path.get(i + 1).toPosition());
+            if (b == null) continue;
+            renderEvent.getSource().drawLine(a.x, a.y, b.x, b.y);
         }
 
         PositionalDebug.outline(renderEvent.getSource(), PathHandler.furthestTileInPath(pathResult.getPath().stream().map(Point3D::toPosition).collect(Collectors.toList()), 20), new Color(255, 67,0, 140));

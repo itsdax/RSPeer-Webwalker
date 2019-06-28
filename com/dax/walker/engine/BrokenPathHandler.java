@@ -97,9 +97,7 @@ public class BrokenPathHandler {
 
     public static PathHandleState handle(Position start, Position end, WalkCondition walkCondition) {
         SceneObject sceneObject = getBlockingObject(start, end);
-        if (sceneObject != null) {
-            return handleObject(start, end, sceneObject, walkCondition);
-        }
+        if (sceneObject != null) return handleObject(start, end, sceneObject, walkCondition);
 
         Log.severe(String.format(
                 "No PathLink handler for (%d, %d, %d)->(%d, %d, %d)",

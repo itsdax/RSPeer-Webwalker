@@ -10,8 +10,7 @@ public class StackTracePainter {
         StackTraceElement[] stackTraceElements = thread.getStackTrace();
         for (int i = 0; i < stackTraceElements.length; i++) {
             StackTraceElement stackTraceElement = stackTraceElements[i];
-            if (!stackTraceElement.toString().matches(".+\\.dax\\..+")) continue;
-
+//            if (!stackTraceElement.toString().matches(".+\\.dax\\..+")) continue;
             String clean = stackTraceElement.toString().substring("com.dax.".length());
             PaintUtils.drawDebug(g, clean, x, y += 15, 2, 1);
         }

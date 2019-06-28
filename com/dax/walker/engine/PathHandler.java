@@ -74,25 +74,30 @@ public class PathHandler {
     }
 
     private static PathHandleState handleNextAction(Position previous, Position now, List<Position> path, WalkCondition walkCondition) {
-        if (ShipHandler.isOnShip()) {
-            return ShipHandler.getOffBoat() ? PathHandleState.SUCCESS : PathHandleState.FAILED;
-        }
-
+        if (ShipHandler.isOnShip()) return ShipHandler.getOffBoat() ? PathHandleState.SUCCESS : PathHandleState.FAILED;
         if (now == null) return PathHandleState.FAILED;
 
-        // Broken Path
+        // Disconnected Path
         if (previous != null && previous.equals(now)) {
             Position next = getNextTileInPath(now, path);
             if (next != null) {
-                Log.log(Level.FINE, "DaxWalker", String.format("Handling disconnected path... %s -> %s", now, next));
+                Log.log(Level.FINE, "DaxWalker", String.format("Disconnected path: (%d,%d,%d) -> (%d,%d,%d)",
+                        now.getX(), now.getY(), now.getFloorLevel(),
+                        next.getX(), next.getY(), next.getFloorLevel()
+                ));
                 PathHandleState pathHandleState = BrokenPathHandler.handlePathLink(now, next, walkCondition);
                 if (pathHandleState != null) return pathHandleState;
                 return BrokenPathHandler.handle(now, next, walkCondition);
             }
+            Log.log(Level.FINE, "DaxWalker", "Clicking supposed last tile in path...");
+            return Movement.setWalkFlagWithConfirm(now) ? PathHandleState.SUCCESS : PathHandleState.FAILED; // Finished Path most likely
         }
 
+        Position destination = new BFSMapCache(now, new Region()).getRandom(2);
+        if (destination == null) return PathHandleState.FAILED;
+
         // Normal Walking
-        if (!Movement.setWalkFlagWithConfirm(now)) return PathHandleState.FAILED;
+        if (!Movement.setWalkFlagWithConfirm(destination)) return PathHandleState.FAILED;
 
         AtomicBoolean exitCondition = new AtomicBoolean(false);
         RunManager runManager = new RunManager();
@@ -102,21 +107,22 @@ public class PathHandler {
                 exitCondition.set(true);
                 return true;
             }
-            return !runManager.isWalking() || Players.getLocal().getPosition().distance(now) <= distance;
+            return !runManager.isWalking() || Players.getLocal().getPosition().distance(destination) <= distance;
         }, 15000);
         return exitCondition.get() ? PathHandleState.EXIT : PathHandleState.SUCCESS;
     }
 
     private static boolean isFinishedPathing(Position destination) {
+        if (Players.getLocal().getPosition().equals(destination)) return true;
         Position walkingTo = Movement.getDestination();
-        return Players.getLocal().getPosition().equals(destination) || (walkingTo != null && walkingTo.equals(destination));
+        if (walkingTo == null) return false;
+        if (walkingTo.equals(destination)) return true;
+        return walkingTo.distance(destination) < 5 && new BFSMapCache(walkingTo, new Region()).getMoveCost(destination) <= 2;
     }
 
     private static Position getNextTileInPath(Position current, List<Position> path) {
         for (int i = 0; i < path.size() - 1; i++) {
-            if (path.get(i).equals(current)) {
-                return path.get(i + 1);
-            }
+            if (path.get(i).equals(current)) return path.get(i + 1);
         }
         return null;
     }

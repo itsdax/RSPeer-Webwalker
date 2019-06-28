@@ -11,7 +11,7 @@ public class RunManager {
     }
 
     public boolean isWalking() {
-        return System.currentTimeMillis() - initial < 1600 || Players.getLocal().isMoving();
+        return System.currentTimeMillis() - initial < 1300 || Players.getLocal().isMoving();
     }
 
 }
