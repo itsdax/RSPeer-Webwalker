@@ -1,6 +1,6 @@
 # RSPeer-Webwalker
 
-Fast and customizable webwalker for RSPeer. Instantly calculates a path to your destination and walks it. Accounts for path requirements (quests, items, level), teleports, and shortcuts. Handles script pauses and stops. Dynamic walking conditions and exit conditions.
+Fast and customizable webwalker for RSPeer. Instantly calculates a path to your destination and walks it. Accounts for path requirements (quests, items, level), teleports, and shortcuts. Handles script pauses and stops. Dynamic walking conditions and exit conditions. Features collision aware randomness when selecting which tiles to walk on.
 
 #### Creating DaxWalker instance
 ```java
