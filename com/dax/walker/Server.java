@@ -53,7 +53,7 @@ public class Server {
             switch (response.code()) {
 
                 case 429:
-                    Log.log(Level.WARNING, "Server", String.format("Rate limit reset in %s seconds.", response.headers().get("X-RateLimit-Reset")));
+                    Log.log(Level.WARNING, "Server", "Rate limit hit");
                     this.rateLimit = System.currentTimeMillis();
                     throw new RateLimitException(response.message());
 
