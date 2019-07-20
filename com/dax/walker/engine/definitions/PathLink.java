@@ -140,7 +140,12 @@ public enum PathLink {
     BURTHORP_UPSTAIRS (
             new Position(2205, 4934, 1), new Position(2899, 3565, 0),
             (start, end, walkCondition) -> BrokenPathHandler.NextMove.FLOOR_ABOVE.handle() ? PathHandleState.SUCCESS : PathHandleState.FAILED
-            );
+            ),
+    
+    PORT_PHASMATYS_SOUTH (
+            new Position(3659, 3507 ,0), new Position(3659, 3509, 0),
+            (start, end, walkCondition) -> BrokenPathHandler.NextMove.SAME_FLOOR.handle() ? PathHandleState.SUCCESS : PathHandleState.FAILED
+    );
 
     private Position a;
     private Position b;
