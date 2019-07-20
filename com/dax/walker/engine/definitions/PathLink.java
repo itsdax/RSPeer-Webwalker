@@ -164,6 +164,12 @@ public enum PathLink {
     PORT_PHASMATYS_SOUTH (
             new Position(3659, 3507 ,0), new Position(3659, 3509, 0),
             (start, end, walkCondition) -> BrokenPathHandler.NextMove.SAME_FLOOR.handle() ? PathHandleState.SUCCESS : PathHandleState.FAILED
+    ),
+    
+    
+    DEATH_PLATEAU_DUNGEON (
+            new Position(2858, 3577, 0), new Position(2269,4752,0),
+            (start, end, walkCondition) -> BrokenPathHandler.NextMove.SAME_FLOOR.handle() ? PathHandleState.SUCCESS : PathHandleState.FAILED
     );
     
     private Position a;
@@ -190,3 +196,4 @@ public enum PathLink {
     }
     
 }
+    
