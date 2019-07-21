@@ -185,8 +185,14 @@ public enum Teleport {
             () -> WearableItemTeleport.has(WearableItemTeleport.GLORY_MATCHER),
             () -> WearableItemTeleport.teleport(WearableItemTeleport.GLORY_MATCHER, Pattern.compile("(?i).*al kharid.*"))
     ),
+    
+    ARDOUGNE_CLOAK_MONASTERY(
+            35, new Position(2609, 3222, 0),
+            () -> WearableItemTeleport.has(WearableItemTeleport.ARDOUGNE_CLOAK_MATCHER),
+            () -> WearableItemTeleport.teleport(WearableItemTeleport.ARDOUGNE_CLOAK_MATCHER, Pattern.compile("(?i).*monastery teleport.*"))
+    );
 
-    ;
+    
 
     private int moveCost;
     private Position location;
