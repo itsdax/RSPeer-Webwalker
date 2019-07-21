@@ -9,16 +9,20 @@ import com.dax.walker.engine.utils.RunManager;
 import org.rspeer.runetek.adapter.Positionable;
 import org.rspeer.runetek.adapter.component.InterfaceComponent;
 import org.rspeer.runetek.adapter.scene.Npc;
+import org.rspeer.runetek.api.Game;
 import org.rspeer.runetek.api.commons.Time;
 import org.rspeer.runetek.api.component.Dialog;
 import org.rspeer.runetek.api.component.tab.Inventory;
 import org.rspeer.runetek.api.movement.position.Position;
 import org.rspeer.runetek.api.movement.transportation.CharterShip;
 import org.rspeer.runetek.api.scene.Npcs;
+import org.rspeer.runetek.api.scene.Players;
+import org.rspeer.ui.Log;
 
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.concurrent.atomic.AtomicBoolean;
+import java.util.logging.Level;
 import java.util.regex.Pattern;
 
 @DoNotRename
@@ -68,6 +72,42 @@ public class EntityHandler {
         }
         if (exitCondition.get()) return PathHandleState.EXIT;
         return BrokenPathHandler.handle(new Position(3304, 3117, 0), new Position(3304, 3315, 0), walkCondition);
+    }
+    
+    public static PathHandleState handleMagicCarpet(WalkCondition walkCondition, String destination) {
+        Npc target = Npcs.getNearest(npc -> npc.getName().equals("Rug Merchant") && npc.containsAction("Travel"));
+        
+        if (target == null) return PathHandleState.FAILED;
+        if (!target.interact("Travel")) return PathHandleState.FAILED;
+        
+        AtomicBoolean exitCondition = new AtomicBoolean(false);
+        if (Time.sleepUntil(() -> {
+            if (Dialog.isViewingChatOptions()) {
+                return true;
+            }
+            if (walkCondition.getAsBoolean()) {
+                exitCondition.set(true);
+                return true;
+            }
+            return false;
+        },5000) && exitCondition.get()){
+            return PathHandleState.EXIT;
+        }
+        if (!Dialog.process(destination)) return PathHandleState.FAILED;
+        if (!Time.sleepUntil(() -> Players.getLocal().getStance() == 6936, 10000)) return PathHandleState.FAILED;
+        if (Time.sleepUntil(() -> {
+            if (Players.getLocal().getStance() != 6936) {
+                return true;
+            }
+            if (walkCondition.getAsBoolean()) {
+                exitCondition.set(true);
+                return true;
+            }
+            return false;
+        },60000) && exitCondition.get()){
+            return PathHandleState.EXIT;
+        }
+        return PathHandleState.SUCCESS;
     }
     
     public static boolean selectOption() {
