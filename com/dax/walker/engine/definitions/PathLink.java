@@ -170,6 +170,26 @@ public enum PathLink {
     DEATH_PLATEAU_DUNGEON (
             new Position(2858, 3577, 0), new Position(2269,4752,0),
             (start, end, walkCondition) -> BrokenPathHandler.NextMove.SAME_FLOOR.handle() ? PathHandleState.SUCCESS : PathHandleState.FAILED
+    ),
+    
+    CARPET_SHANTAY_POLLNIVNEACH (
+            new Position(3311, 3109, 0), new Position(3350, 3002, 0),
+            (start, end, walkCondition) -> EntityHandler.handleMagicCarpet(walkCondition, "Pollnivneach")
+    ),
+    
+    CARPET_SHANTAY_BEDABIN_CAMP (
+            new Position(3311, 3109, 0), new Position(3181, 3043, 0),
+            (start, end, walkCondition) -> EntityHandler.handleMagicCarpet(walkCondition, "Bedabin camp")
+    ),
+    
+    CARPET_BEDABIN_CAMP_SHANTAY (
+            new Position(3181, 3043, 0), new Position(3311, 3109, 0),
+            (start, end, walkCondition) -> EntityHandler.handleMagicCarpet(walkCondition, "Shantay Pass")
+    ),
+    
+    CARPET_POLLNIVNEACH_SHANTAY (
+            new Position(3350, 3002, 0), new Position(3311, 3109, 0),
+            (start, end, walkCondition) -> EntityHandler.handleMagicCarpet(walkCondition, "Shantay Pass")
     );
     
     private Position a;

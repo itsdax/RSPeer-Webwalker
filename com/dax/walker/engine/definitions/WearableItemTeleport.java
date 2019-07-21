@@ -16,6 +16,7 @@ public class WearableItemTeleport {
     public static final Pattern COMBAT_BRACE_MATCHER = Pattern.compile("(?i)combat brace.+\\(.+");
     public static final Pattern GAMES_NECKLACE_MATCHER = Pattern.compile("(?i)game.+neck.+\\(.+");
     public static final Pattern GLORY_MATCHER = Pattern.compile("(?i).+glory.*\\(.+");
+    public static final Pattern ARDOUGNE_CLOAK_MATCHER = Pattern.compile("(?i)ardougne cloak.?.+");
 
 
     private WearableItemTeleport() {
@@ -31,7 +32,8 @@ public class WearableItemTeleport {
         if (teleportEquipment(itemMatcher, option)) return true;
         Item inventoryItem = Inventory.getFirst(item -> itemMatcher.matcher(item.getName()).matches() && !item.isNoted());
         if (inventoryItem == null) return false;
-        if (!inventoryItem.interact(s -> option.matcher(s).matches()) && !inventoryItem.interact("Rub")) return false;
+        if (inventoryItem.interact(s -> option.matcher(s).matches())) return true;
+        if (!inventoryItem.interact("Rub")) return false;
         if (!Time.sleepUntil(Dialog::isOpen, 5000)) return false;
         return Dialog.process(s -> option.matcher(s).matches());
     }

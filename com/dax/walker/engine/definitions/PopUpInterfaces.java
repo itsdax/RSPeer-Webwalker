@@ -2,11 +2,14 @@ package com.dax.walker.engine.definitions;
 
 import org.rspeer.runetek.adapter.component.InterfaceComponent;
 import org.rspeer.runetek.api.commons.Time;
+import org.rspeer.runetek.api.component.InterfaceAddress;
 import org.rspeer.runetek.api.component.Interfaces;
 
 public enum PopUpInterfaces {
+    
     STRONGHOLD_PROMPT(() -> Interfaces.getComponent(579, 17)),
-    WILDERNESS_PROMPT(() -> Interfaces.getComponent(475, 11));
+    WILDERNESS_PROMPT(() -> Interfaces.getComponent(475, 11)),
+    SHANTAY_PROMPT(() -> Interfaces.getComponent(565, 17));
 
     private RSPopUp rsPopUp;
 
