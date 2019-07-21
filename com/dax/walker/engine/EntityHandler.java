@@ -11,6 +11,7 @@ import org.rspeer.runetek.adapter.component.InterfaceComponent;
 import org.rspeer.runetek.adapter.scene.Npc;
 import org.rspeer.runetek.api.commons.Time;
 import org.rspeer.runetek.api.component.Dialog;
+import org.rspeer.runetek.api.component.tab.Inventory;
 import org.rspeer.runetek.api.movement.position.Position;
 import org.rspeer.runetek.api.movement.transportation.CharterShip;
 import org.rspeer.runetek.api.scene.Npcs;
@@ -48,7 +49,27 @@ public class EntityHandler {
         if (!CharterShip.isInterfaceOpen()) return PathHandleState.FAILED;
         return CharterShip.charter(destination) ? PathHandleState.SUCCESS : PathHandleState.FAILED;
     }
-
+    
+    public static PathHandleState handleShantayPass(WalkCondition walkCondition) {
+        Npc shantay = Npcs.getNearest("Shantay");
+        
+        AtomicBoolean exitCondition = new AtomicBoolean(false);
+        if (!Inventory.contains("Shantay pass") && (shantay == null || !shantay.interact("Buy-pass") || !Time.sleepUntil(() -> {
+            if (Inventory.contains("Shantay pass")) {
+                return true;
+            }
+            if (walkCondition.getAsBoolean()) {
+                exitCondition.set(true);
+                return true;
+            }
+            return false;
+        },5000))){
+            return PathHandleState.FAILED;
+        }
+        if (exitCondition.get()) return PathHandleState.EXIT;
+        return BrokenPathHandler.handle(new Position(3304, 3117, 0), new Position(3304, 3315, 0), walkCondition);
+    }
+    
     public static boolean selectOption() {
         InterfaceComponent option = Arrays.stream(Dialog.getChatOptions())
                 .max(Comparator.comparingInt(o -> getResponseValue(o.getText())))
