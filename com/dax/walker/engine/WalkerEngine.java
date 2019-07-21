@@ -63,7 +63,7 @@ public class WalkerEngine implements RenderListener {
     }
 
     public boolean walk(List<PathResult> list, WalkCondition walkCondition) {
-        walkCondition = walkCondition != null ? this.walkCondition.and(walkCondition) : this.walkCondition;
+        walkCondition = walkCondition != null ? this.walkCondition.or(walkCondition) : this.walkCondition;
 
         Game.getEventDispatcher().register(this);
         try {

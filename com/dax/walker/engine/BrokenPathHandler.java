@@ -37,7 +37,7 @@ public class BrokenPathHandler {
                 generateCase(sceneObject -> sceneObject.getName().matches("(?i)(trap.?door|manhole)"), Pattern.compile("(?i)Open|(Climb.down)"))
         ),
         FLOOR_ABOVE(Pattern.compile("(?i)(pass|climb|jump|walk).(up|through)")),
-        SAME_FLOOR(Pattern.compile("(Use(?i-m)|pass|(walk|jump|climb).(across|over|under|into)|(open|push|enter)|(.+.through)|cross|board|mine)"));
+        SAME_FLOOR(Pattern.compile("(Exit|Use(?i-m)|pass|(walk|jump|climb).(across|over|under|into)|(open|push|enter)|(.+.through)|cross|board|mine)"));
 
         private Pattern pattern;
         private DestinationStateSpecialCase[] specialCases;
