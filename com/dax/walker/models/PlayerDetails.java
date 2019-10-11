@@ -20,8 +20,10 @@ public class PlayerDetails {
 
     public static PlayerDetails generate() {
         List<IntPair> inventory = Arrays.stream(Inventory.getItems())
+                .filter(s -> !s.getName().equals("Members object"))
                 .map(rsItem -> new IntPair(rsItem.getId(), rsItem.getStackSize())).collect(Collectors.toList());
         List<IntPair> equipment = Arrays.stream(Equipment.getItems())
+                .filter(s -> !s.getName().equals("Members object"))
                 .map(rsItem -> new IntPair(rsItem.getId(), rsItem.getStackSize())).collect(Collectors.toList());
         LinkedHashMap<Integer, Integer> map = Game.getClientPreferences().getProperties();
         List<IntPair> settings = Stream.of(
