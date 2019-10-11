@@ -8,6 +8,7 @@ import com.dax.walker.models.*;
 import com.dax.walker.models.exceptions.AuthorizationException;
 import com.dax.walker.models.exceptions.RateLimitException;
 import com.dax.walker.models.exceptions.UnknownException;
+import com.dax.walker.store.DaxStore;
 import org.rspeer.runetek.adapter.Positionable;
 import org.rspeer.runetek.api.movement.position.Position;
 import org.rspeer.runetek.api.scene.Players;
@@ -21,12 +22,18 @@ public class DaxWalker {
 
     private Server server;
     private WalkerEngine walkerEngine;
+    private DaxStore store;
     private boolean useTeleports;
 
     public DaxWalker(Server server) {
         this.server = server;
-        this.walkerEngine = new WalkerEngine();
+        this.store = new DaxStore();
+        this.walkerEngine = new WalkerEngine(null, this);
         this.useTeleports = true;
+    }
+
+    public DaxStore getStore() {
+        return store;
     }
 
     /**
