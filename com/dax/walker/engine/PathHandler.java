@@ -2,6 +2,7 @@ package com.dax.walker.engine;
 
 import com.allatori.annotations.DoNotRename;
 import com.dax.walker.engine.definitions.PathHandleState;
+import com.dax.walker.engine.definitions.PathLink;
 import com.dax.walker.engine.definitions.Teleport;
 import com.dax.walker.engine.definitions.WalkCondition;
 import com.dax.walker.engine.pathfinding.BFSMapCache;
@@ -29,7 +30,7 @@ public class PathHandler {
      * @param maxRetries       max retries on fail
      * @return true if path completed successfully.
      */
-    public static boolean walk(List<Position> path, WalkCondition walkCondition, int maxRetries) {
+    public static boolean walk(List<Position> path, WalkCondition walkCondition, int maxRetries, List<PathLink> pathLinks) {
         assert Thread.currentThread() instanceof Script;
         Script script = (Script) Thread.currentThread();
 
@@ -50,7 +51,7 @@ public class PathHandler {
             Time.sleep(50);
             if (fail >= maxRetries) return false;
             Position next = furthestTileInPath(path, randomDestinationDistance());
-            PathHandleState state = handleNextAction(previous, next, path, walkCondition);
+            PathHandleState state = handleNextAction(previous, next, path, walkCondition, pathLinks);
 
 
             switch (state) {
@@ -73,7 +74,7 @@ public class PathHandler {
         return true;
     }
 
-    private static PathHandleState handleNextAction(Position previous, Position now, List<Position> path, WalkCondition walkCondition) {
+    private static PathHandleState handleNextAction(Position previous, Position now, List<Position> path, WalkCondition walkCondition, List<PathLink> pathLinks) {
         if (ShipHandler.isOnShip()) return ShipHandler.getOffBoat() ? PathHandleState.SUCCESS : PathHandleState.FAILED;
         if (now == null) return PathHandleState.FAILED;
 
@@ -85,7 +86,7 @@ public class PathHandler {
                         now.getX(), now.getY(), now.getFloorLevel(),
                         next.getX(), next.getY(), next.getFloorLevel()
                 ));
-                PathHandleState pathHandleState = BrokenPathHandler.handlePathLink(now, next, walkCondition);
+                PathHandleState pathHandleState = BrokenPathHandler.handlePathLink(now, next, walkCondition, pathLinks);
                 if (pathHandleState != null) return pathHandleState;
                 return BrokenPathHandler.handle(now, next, walkCondition);
             }

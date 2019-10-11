@@ -20,6 +20,7 @@ import org.rspeer.ui.Log;
 
 import java.util.Arrays;
 import java.util.Comparator;
+import java.util.List;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.function.Predicate;
 import java.util.logging.Level;
@@ -107,8 +108,8 @@ public class BrokenPathHandler {
         return PathHandleState.FAILED;
     }
 
-    public static PathHandleState handlePathLink(Position start, Position end, WalkCondition walkCondition) {
-        PathLink pathLink = Arrays.stream(PathLink.values())
+    public static PathHandleState handlePathLink(Position start, Position end, WalkCondition walkCondition, List<PathLink> pathLinks) {
+        PathLink pathLink = pathLinks.stream()
                 .filter(link -> link.getStart().equals(start) && link.getEnd().equals(end))
                 .findAny()
                 .orElse(null);

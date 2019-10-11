@@ -2,6 +2,7 @@ package com.dax.walker.engine;
 
 import com.allatori.annotations.DoNotRename;
 import com.dax.api.paint.debug.PositionalDebug;
+import com.dax.walker.DaxWalker;
 import com.dax.walker.engine.definitions.Teleport;
 import com.dax.walker.engine.definitions.WalkCondition;
 import com.dax.walker.engine.pathfinding.BFSMapCache;
@@ -33,17 +34,15 @@ public class WalkerEngine implements RenderListener {
     private Map<Position, Teleport> map;
     private WalkCondition walkCondition;
     private RunEnergyManager runEnergyManager;
+    private DaxWalker instance;
 
     // DEBUG PAINT
     private PathResult lastPath;
     private BFSMapCache bfsMapCache;
     private Position playerPosition;
 
-    public WalkerEngine() {
-        this(null);
-    }
-
-    public WalkerEngine(WalkCondition walkCondition) {
+    public WalkerEngine(WalkCondition walkCondition, DaxWalker instance) {
+        this.instance = instance;
         map = new ConcurrentHashMap<>();
         for (Teleport teleport : Teleport.values()) {
             map.put(teleport.getLocation(), teleport);
@@ -75,7 +74,7 @@ public class WalkerEngine implements RenderListener {
             }
             lastPath = pathResult;
             Log.log(Level.FINE, "DaxWalker", String.format("Chose path of cost: %d out of %d options.", pathResult.getCost(), validPaths.size()));
-            return PathHandler.walk(convert(pathResult.getPath()), walkCondition, 3);
+            return PathHandler.walk(convert(pathResult.getPath()), walkCondition, 3, instance.getStore().getPathLinks());
         } finally {
             Game.getEventDispatcher().deregister(this);
         }
