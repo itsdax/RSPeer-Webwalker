@@ -66,6 +66,7 @@ public class DaxWalker {
      * @return
      */
     public WalkState walkTo(Positionable positionable, WalkCondition walkCondition) {
+        Log.info("DaxWalker", String.format("Navigating to (%d,%d,%d)", positionable.getX(), positionable.getY(), positionable.getFloorLevel()));
         List<PathRequestPair> pathRequestPairs = useTeleports ? getPathTeleports(positionable.getPosition()) : new ArrayList<>();
         pathRequestPairs.add(new PathRequestPair(Point3D.from(localPosition()), Point3D.from(positionable.getPosition())));
 
