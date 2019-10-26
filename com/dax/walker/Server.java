@@ -48,10 +48,10 @@ public class Server {
         if (System.currentTimeMillis() - rateLimit < 5000L) throw new RateLimitException("Throttling requests because key rate limit.");
 
         Request request = generateRequest(url, RequestBody.create(MediaType.parse("application/json"), jsonPayload));
+        long start = System.currentTimeMillis();
         try {
             Response response = okHttpClient.newCall(request).execute();
             switch (response.code()) {
-
                 case 429:
                     Log.log(Level.WARNING, "Server", "Rate limit hit");
                     this.rateLimit = System.currentTimeMillis();
@@ -63,8 +63,8 @@ public class Server {
                 case 200:
                     ResponseBody responseBody = response.body();
                     if (responseBody == null) throw new IllegalStateException("Illegal response returned from server.");
+                    Log.info("DaxWalker", String.format("Generated path in %dms", System.currentTimeMillis() - start));
                     return gson.fromJson(responseBody.string(), new TypeToken<List<PathResult>>() {}.getType());
-
             }
         } catch (IOException e) {
             Log.log(Level.SEVERE, "Server", e.toString());
