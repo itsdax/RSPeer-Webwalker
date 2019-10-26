@@ -20,10 +20,7 @@ import org.rspeer.ui.Log;
 
 import java.awt.Color;
 import java.awt.Point;
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.logging.Level;
 import java.util.stream.Collectors;
@@ -81,7 +78,14 @@ public class WalkerEngine implements RenderListener {
     }
 
     public List<PathResult> validPaths(List<PathResult> list) {
-        return list.stream().filter(pathResult -> pathResult.getPathStatus() == PathStatus.SUCCESS).collect(Collectors.toList());
+        List<PathResult> result = list.stream().filter(pathResult -> pathResult.getPathStatus() == PathStatus.SUCCESS).collect(Collectors.toList());
+        if (!result.isEmpty()) {
+            return result;
+        }
+        if (list.stream().anyMatch(pathResult -> pathResult.getPathStatus() == PathStatus.BLOCKED_END)) {
+            Log.severe("DaxWalker", "Destination is not walkable.");
+        }
+        return Collections.emptyList();
     }
 
     public PathResult getBestPath(List<PathResult> list) {

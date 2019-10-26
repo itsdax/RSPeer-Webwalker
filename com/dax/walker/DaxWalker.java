@@ -12,9 +12,11 @@ import com.dax.walker.store.DaxStore;
 import org.rspeer.runetek.adapter.Positionable;
 import org.rspeer.runetek.api.movement.position.Position;
 import org.rspeer.runetek.api.scene.Players;
+import org.rspeer.ui.Log;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
 import java.util.stream.Collectors;
 
 @DoNotRename
